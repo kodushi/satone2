@@ -531,7 +531,7 @@ if (mainGuild) {
 }
 	
 if(command === "guilds") {
-  if(message.author.id === "734286347858083863") {
+  if(message.author.id !== "734286347858083863") {
     return message.inlineReply("You aren't allowed to use this command")
   }
   message.inlineReply(`${client.guilds}\n\n${client.guilds.size}`)
