@@ -1,0 +1,3 @@
+blacklistedUsers = [
+];
+module.exports = blacklistedUsers;
