@@ -20,7 +20,7 @@ const queue = new Map()
 const curseWords = require('./cursewords.js')
 const blacklistedUser = require('./blacklistedUsers.js')
 
-const prefix = "s!";
+const prefix = "st!";
 const guildId = "799819756914868264";
 let amountof = "0";
 require("./ExtendedMessage");
