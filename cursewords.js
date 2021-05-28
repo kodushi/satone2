@@ -1,0 +1,26 @@
+curseWords = [
+ "nigger",
+ "n1gg3r",
+  "n4gger",
+  "n1gger",
+  "nigg3r",
+  "retard",
+  "r3tard",
+  "r3t4rd",
+  "ret4rd",
+  "faggot",
+  "f4gg0t",
+  "f4ggot",
+  "fagg0t",
+  "childfucker",
+  "child-fucker",
+  "gaylord",
+  "blackfucker",
+  "black-fucker",
+  "bl4ck-f4ck3r",
+  "bl4ckf4cker",
+  "bl4ckfucker",
+  "blackfuck3r",
+];
+
+module.exports = curseWords;
