@@ -28,7 +28,7 @@ const WOKCommands = require("wokcommands");
 const { default: messageHandler } = require("wokcommands/dist/message-handler");
 module.exports = { amountof: `${amountof}` };
 client.on("ready", () => {
-	client.user.setActivity('the chat!', { type: 'WATCHING' });
+	client.user.setActivity(`with Satone`, { type: "PLAYING" });
 });
 
 client.on("ready", () => {
