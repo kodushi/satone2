@@ -18,6 +18,7 @@ const searcher = new YTSearcher({
 const queue = new Map()
 
 const curseWords = require('./cursewords.js')
+const blacklistedUser = require('./blacklistedUsers.js')
 
 const prefix = "s!";
 const guildId = "799819756914868264";
@@ -26,7 +27,6 @@ require("./ExtendedMessage");
 const WOKCommands = require("wokcommands");
 const { default: messageHandler } = require("wokcommands/dist/message-handler");
 module.exports = { amountof: `${amountof}` };
-
 client.on("ready", () => {
 	client.user.setActivity('the chat!', { type: 'WATCHING' });
 });
@@ -39,6 +39,9 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
+
+  const blEmbed = new Discord.MessageEmbed().setColor("#DE3163").setTitle("You're blacklisted!").setThumbnail("https://i.imgur.com/5ekx3hM.png").setDescription("A developer has banned you from our bot\n\nYou've likely abused the bot in one way or another.").addFields({ name: "How do I appeal?", value: "DM zenyxis#0001" }, { name: "How long is this blacklist?", value: "This blacklist is indefinite, however can be lifted, and will be lifted every major update"}).setFooter("Satone").setTimestamp();
+
   for (var i = 0; i < curseWords.length; i++) {
     if (message.content.toLowerCase().includes(curseWords[i]) && !message.author.bot) {
       amountof++;
@@ -65,7 +68,7 @@ client.on("message", (message) => {
     }
   }
 
-  if (message.content === prefix + "count") {
+  if (message.content === prefix + "count" ) {
     message.inlineReply("I have moderated " + amountof + " words!");
   }
 
@@ -92,6 +95,12 @@ client.on("message", (message) => {
     let slowtime = args[0];
     let slowreason = args[1];
     
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
+
     if (!message.member.guild.me.hasPermission("MANAGE_CHANNELS")) return message.inlineReply("I don't have the required permissions!")
     if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.inlineReply("You don't have the required permissions!")
     if (!slowtime) {
@@ -119,6 +128,11 @@ client.on("message", (message) => {
   if (command === "kick") {
     const user = message.mentions.users.first();
     let kickreason = args[1];
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
     if (!message.member.hasPermission("KICK_MEMBERS"))
       return message.inlineReply("You do not have permission to use kick");
     if (!message.member.guild.me.hasPermission("KICK_MEMBERS"))
@@ -148,6 +162,11 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
   }
 
   if (command === "ban") {
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
     const user = message.mentions.users.first();
     let banreason = args[2];
     let banlong = args[1];
@@ -187,6 +206,11 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
   }
 
   if (command === "mute") {
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
     const user = message.mentions.users.first();
     let mutedrole = message.guild.roles.cache.find((role) => role.name === "Muted");
     let mutereason = args[1];
@@ -226,6 +250,11 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
   }
 
   if (command === "unmute") {
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
     const user = message.mentions.users.first();
     let mutedrole = message.guild.roles.cache.find((role) => role.name === "Muted");
     if (!message.member.hasPermission("MANAGE_ROLES"))
@@ -325,16 +354,36 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
 
 
   if(command === "play" || command === "p") {
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
           execute(message, serverQueue);
   }
       if(command === "stop" || command === "end" || command === "die") {
+        for (var i = 0; i < curseWords.length; i++) {
+          if(message.author.id === blacklistedUser[i]) {
+            return message.inlineReply(blEmbed);
+          }
+        }
           stop(message, serverQueue);
       }
  
   if(command === "skip" || command === "s" || command === "next") {
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
           skip(message, serverQueue);
   }
   if(command === "queue" || command === "q" || command === "songs") {
+    for (var i = 0; i < curseWords.length; i++) {
+      if(message.author.id === blacklistedUser[i]) {
+        return message.inlineReply(blEmbed);
+      }
+    }
   	  listQueue(serverQueue)
   }
 
@@ -430,6 +479,27 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
 	message.inlineReply(queueEmbed)
   	
   }
+
+  
+0
+
+if(command === "av" || command === "avatar"){
+    if(message.mentions.users.size){
+            let member=message.mentions.users.first()
+        if(member){
+            const emb = new Discord.MessageEmbed().setColor("#DE3163").setImage(member.displayAvatarURL()).setTitle(`${member.username}'s avatar`).setFooter("Satone").setTimestamp();
+            message.inlineReply(emb)
+            
+        }
+        else{
+            message.inlineReply("No users were found with that username!")
+
+        }
+        }else{
+            const emb=new Discord.MessageEmbed().setImage(message.author.displayAvatarURL()).setTitle(message.author.username)
+            message.inlineReply(emb)
+        }
+}
 
 
 	
