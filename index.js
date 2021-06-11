@@ -295,7 +295,7 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
   if (command === "help") {
     const embed = new Discord.MessageEmbed()
       .setColor("#DE3163")
-      .setTitle("Satone")
+      .setTitle("Satone2")
       .setDescription("Multipurpose Moderation & Censorship Bot")
       .setThumbnail(
         "https://kodushi.com/satone.gif"
@@ -339,7 +339,7 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
 	      { name: "Skip", value: "Skips the song! s!stop", }
       )
     	
-      .setFooter("Created by zenyxis#0001")
+      .setFooter("Created by zenyxis#0001| DEVELOPMENT VERSION v1.1")
       .setTimestamp();
     message.channel.send(embed);
   }
@@ -467,7 +467,7 @@ if(member.roles.highest.position > message.guild.members.resolve(client.user).ro
 	let queueEmbed
 	
 	if(serverQueue.songs.length === 3 || serverQueue.songs.length >= 4) { 
-		queueEmbed = new Discord.MessageEmbed().setColor("#DE3163").setTitle("Satone | Queue").setDescription(`${serverQueue.songs[0].title}\n\n${serverQueue.songs[1].title}\n\n${serverQueue.songs[2].title}`).addFields({ name: "Now Playing", value: `${serverQueue.songs[0].title} | ${serverQueue.songs[0].url}` }).setFooter("Satone").setTimestamp()
+		queueEmbed = new Discord.MessageEmbed().setColor("#DE3163").setTitle("Satone2 | Queue").setDescription(`${serverQueue.songs[0].title}\n\n${serverQueue.songs[1].title}\n\n${serverQueue.songs[2].title}`).addFields({ name: "Now Playing", value: `${serverQueue.songs[0].title} | ${serverQueue.songs[0].url}` }).setFooter("Satone").setTimestamp()
 	}
 	if(serverQueue.songs.length === 2) {
 	    queueEmbed = new Discord.MessageEmbed().setColor("#DE3163").setTitle("Satone | Queue").setDescription(`${serverQueue.songs[0].title}\n\n${serverQueue.songs[1].title}`).addFields({ name: "Now Playing", value: `${serverQueue.songs[0].title} | ${serverQueue.songs[0].url}` }).setFooter("Satone").setTimestamp()
